@@ -95,15 +95,22 @@ List::List(ifstream & o, int len)
 
 
 	for (int i = 0; i < len; i++) {
-
+		int * temp;
 		int n;
 		o >> n;
-		for (int j = 0; j < n; j++) {
+		temp = new int[n];
 
+		for (int j = 0; j < n; j++) {
 			int addedNum;
 			o >> addedNum;
-			this->add(i, addedNum);
+			temp[j] =  addedNum;
 		}
+
+		for (int j = n-1; j >= 0; j--) {
+			this->add(i, temp[j]);
+		}
+
+		delete[] temp;
 	}
 
 }
@@ -113,4 +120,5 @@ List::List(ifstream & o, int len)
 List::~List()
 {
 	delete[] heads;
+	delete z;
 }
